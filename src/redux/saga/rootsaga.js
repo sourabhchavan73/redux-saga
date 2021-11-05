@@ -1,7 +1,8 @@
 import { takeLatest } from 'redux-saga/effects';
-import { SET_USER } from '../actions/type';
-import { handleGetUser } from './handler/user';
+import { GET_USERS, DELETE_USER } from '../actions/type';
+import { handleGetUser, handleDeleteuser } from './handler/user';
 
 export function* watcherSaga(){
-    yield takeLatest(SET_USER, handleGetUser)
+    yield takeLatest(GET_USERS, handleGetUser);
+    yield takeLatest(DELETE_USER, handleDeleteuser);
 }

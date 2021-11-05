@@ -1,20 +1,38 @@
+import _ from 'lodash'
 import {
-    GET_USER,
-    SET_USER
+    GET_USERS,
+    SET_USER,
+    DELETE_USER
 } from '../actions/type'
 
-const initialState = {
-    user: undefined
-};
+// const initialState = {
+//     user: undefined
+// };
 
-export default (state = initialState, action) => {
+const userReducer =  (state = {}, action) => {
     switch(action.type){
         case SET_USER:
-            return {
-                ...state, user: action.payload
-            }
-            default:{
+            return { ...state, ...action.payload }
+
+        // case SET_USER:
+        //     return {
+        //         ...state, user: action.payload
+        //     };
+
+        case DELETE_USER:
+            if(state.user){
+                return{ 
+                    ...state, 
+                    user: state.user.filter(user => user.id !== action.payload)
+                };
+            }else{
                 return state
             }
+
+        default:{
+            return state
+        }
     }
 }
+
+export default userReducer
